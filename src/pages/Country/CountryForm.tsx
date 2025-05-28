@@ -19,7 +19,7 @@ const validateMessages = {
 };
 
 const App: React.FC = () => {
-  const [createCountry] = useCreateCoutryMutation();
+  const [createCountry,{isLoading}] = useCreateCoutryMutation();
 
   const onFinish = (values: any) => {
     const { name, capital, image } = values.Country;
@@ -69,7 +69,7 @@ const App: React.FC = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            <Button type="primary" htmlType="submit">
+            <Button disabled={isLoading} type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>
