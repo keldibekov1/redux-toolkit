@@ -28,7 +28,7 @@ const App: React.FC = () => {
 
     createCountry(newCountry)
       .unwrap()
-      .then((res) => {
+      .then((_res) => {
         form.resetFields(); 
       })
       .catch((err) => {
