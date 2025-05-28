@@ -26,7 +26,7 @@ const extendedApi = mainApi.injectEndpoints({
     }),
     updateCoutry: build.mutation({
       query: ({ id, ...body }) => ({
-        method: "PATCH",
+        method: "PUT",
         url: `/country/${id}`,
         body,
       }),
