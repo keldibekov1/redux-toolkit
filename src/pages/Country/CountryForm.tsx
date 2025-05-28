@@ -19,18 +19,21 @@ const validateMessages = {
 };
 
 const App: React.FC = () => {
-  const [createCountry,{isLoading}] = useCreateCoutryMutation();
+  const [form] = Form.useForm();
+  const [createCountry, { isLoading }] = useCreateCoutryMutation();
 
   const onFinish = (values: any) => {
     const { name, capital, image } = values.Country;
-    const newCountry = {
-      name,
-      capital,
-      image,
-    };
+    const newCountry = { name, capital, image };
 
-    console.log("Yangi country:", newCountry);
-    createCountry(newCountry);
+    createCountry(newCountry)
+      .unwrap()
+      .then((res) => {
+        form.resetFields(); 
+      })
+      .catch((err) => {
+        console.error("Xatolik:", err);
+      });
   };
 
   return (
@@ -38,6 +41,7 @@ const App: React.FC = () => {
       <div className="w-[400px]">
         <Form
           {...layout}
+          form={form}
           layout="vertical"
           name="country-form"
           onFinish={onFinish}
